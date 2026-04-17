@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 19.8, "left": 191.4, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd1", "top": -294.17, "left": 265.6, "attrs": {} },
+    { "type": "wokwi-rgb-led", "id": "rgb1", "top": -140, "left": 231.5, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -14.95,
+      "left": 248.2,
+      "rotate": 180,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -149.65,
+      "left": 460.8,
+      "attrs": { "value": "330" }
+    },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 8.3, "left": 527.8, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot2", "top": 8.3, "left": 614.2, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot3", "top": 8.3, "left": 700.6, "attrs": {} },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "ntc1",
+      "top": 146.6,
+      "left": 565.8,
+      "attrs": {}
+    },
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic1", "top": -132.9, "left": 562.3, "attrs": {} }
+  ],
+  "connections": [
+    [ "uno:2", "lcd1:D7", "green", [ "v-67.2", "h-63.1" ] ],
+    [ "uno:3", "lcd1:D6", "green", [ "v-57.6", "h-5.6" ] ],
+    [ "uno:4", "lcd1:D5", "green", [ "v-48", "h-63.3" ] ],
+    [ "uno:5", "lcd1:D4", "green", [ "v-38.4", "h-5.8" ] ],
+    [ "uno:6", "lcd1:E", "magenta", [ "v-28.8", "h-5.9", "v-86.4", "h-38.4" ] ],
+    [ "lcd1:VDD", "uno:5V", "red", [ "v9.6", "h-143.9", "v393.6", "h188.2" ] ],
+    [ "lcd1:VSS", "lcd1:K", "#8f4814", [ "v9.6", "h144" ] ],
+    [ "lcd1:A", "r2:1", "green", [ "v0" ] ],
+    [ "r1:1", "uno:GND.1", "black", [ "v0" ] ],
+    [ "r1:2", "rgb1:COM", "black", [ "v0" ] ],
+    [ "uno:12", "lcd1:RS", "gold", [ "v0" ] ],
+    [ "uno:13", "lcd1:RW", "orange", [ "v-172.8", "h19.6" ] ],
+    [ "pot1:GND", "pot2:GND", "black", [ "v9.6", "h86.4" ] ],
+    [ "pot2:GND", "pot3:GND", "black", [ "v9.6", "h76.8" ] ],
+    [ "pot1:VCC", "pot2:VCC", "red", [ "v19.2", "h85.6" ] ],
+    [ "pot2:VCC", "pot3:VCC", "red", [ "v19.2", "h85.6" ] ],
+    [ "uno:GND.2", "pot3:GND", "black", [ "v38.3", "h368.7" ] ],
+    [ "uno:GND.2", "ntc1:GND", "black", [ "v38.3", "h368.7", "v-76.8" ] ],
+    [ "uno:5V", "ntc1:VCC", "red", [ "v28.7", "h368.6", "v-57.6" ] ],
+    [ "ntc1:OUT", "uno:A0", "orange", [ "h9.6", "v38.3", "h-311" ] ],
+    [ "pot1:SIG", "uno:A1", "violet", [ "v28.8", "h-19.6" ] ],
+    [ "pot2:SIG", "uno:A2", "violet", [ "v38.4", "h-230.8" ] ],
+    [ "pot3:SIG", "uno:A3", "violet", [ "v48", "h-307.6" ] ],
+    [ "ntc1:VCC", "r2:2", "red", [ "h96", "v-297.6" ] ],
+    [ "pot3:VCC", "ultrasonic1:VCC", "red", [ "v19.2", "h37.6", "v-96", "h-153.6" ] ],
+    [ "ultrasonic1:GND", "ntc1:GND", "black", [ "v28.8", "h142.8", "v182.4" ] ],
+    [ "ultrasonic1:TRIG", "uno:7", "orange", [ "v9.6", "h-269.2" ] ],
+    [ "rgb1:R", "uno:11", "red", [ "v67.2", "h96" ] ],
+    [ "rgb1:G", "uno:10", "limegreen", [ "v57.6", "h78.1" ] ],
+    [ "rgb1:B", "uno:9", "blue", [ "v48", "h88" ] ],
+    [ "ultrasonic1:ECHO", "uno:8", "limegreen", [ "v19.2", "h-288.8" ] ]
+  ],
+  "dependencies": {}
+}
