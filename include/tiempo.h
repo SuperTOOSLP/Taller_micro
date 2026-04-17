@@ -7,6 +7,6 @@
 volatile uint8_t h, m, s;
 
 void iniciar_tiempo(void);
-void obtener_tiempo(void);
+void obtener_tiempo(uint8_t *h, uint8_t *m, uint8_t *s);
 
 #endif
