@@ -2,12 +2,7 @@
 #include "led_RGB.h"
 #include "temporizador.h"
 #include "tiempo.h"
-#include "sensor_temperatura.h"
 #include "lectura_potenciometros.h"
-#include "HCSR04.h"
-#include <stdio.h>
-
-char buffer[10];
  
 uint32_t tiempo = 0;
 uint32_t pasado = 0;
@@ -25,7 +20,7 @@ int main(){
     lcd_begin();
 
     lcd_setCursor(0, 0);
-    lcd_print("Sistema");
+    lcd_print("Iniciando");
 
     while(1){
         
@@ -34,14 +29,7 @@ int main(){
 
         if(dt >= 1000){
 
-            float distancia = obtener_distancia();
-
-            int d = (int)distancia;
-            sprintf(buffer, "%d cm", d);
-
-            lcd_clear();
-            lcd_setCursor(0, 1);
-            lcd_print(buffer);
+            mostrar_display();
 
             pasado = tiempo;
         }
