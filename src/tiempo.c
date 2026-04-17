@@ -19,12 +19,11 @@ void iniciar_tiempo(void){
     sei();
 }
 
-void obtener_tiempo(void){
-
-    volatile uint8_t h, m, s;
+void obtener_tiempo(uint8_t *h, uint8_t *m, uint8_t *s)
+{
     cli();
-
-    h = hora;
-    m = min;
-    s = seg;
+    *h = hora;
+    *m = min;
+    *s = seg;
+    sei();
 }
