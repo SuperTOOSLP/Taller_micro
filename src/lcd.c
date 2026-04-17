@@ -93,7 +93,10 @@ void lcd_print(const char *str)
 }
 
 void mostrar_display(void){
-    obtener_tiempo();
+    
+    uint8_t h, m, s;
+    obtener_tiempo(&h, &m, &s);
+
 
     char buffer_distancia[10];
     char buffer_hora[4];
