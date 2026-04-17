@@ -1,8 +1,12 @@
 #ifndef LCD_H
 #define LCD_H
 
+#include <stdio.h>
 #include <avr/io.h>
 #include <temporizador.h>
+#include <tiempo.h>
+#include <sensor_temperatura.h>
+#include <HCSR04.h>
 
 /// asignacion de pines para lcd
 #define LCD_D7 PD2
@@ -13,6 +17,7 @@
 #define LCD_RS PB4
 #define LCD_RW PB5
 
+void mostrar_display(void);
 void lcd_begin(void);
 void lcd_clear(void);
 void lcd_setCursor(uint8_t col, uint8_t row);
