@@ -93,20 +93,34 @@ void lcd_print(const char *str)
 }
 
 void mostrar_display(void){
+    obtener_tiempo();
 
     char buffer_distancia[10];
-    //char buffer_rojo[3];
-    //char buffer_verde[3];
-    //char buffer_azul[3];
+    char buffer_hora[4];
+    char buffer_minutos[4];
+    char buffer_segundos[4];
     char buffer_temperatura[10];
 
 
     sprintf(buffer_distancia, "%d cm", (int)obtener_distancia());
     sprintf(buffer_temperatura, "%d", (int)read_temperature());
+    sprintf(buffer_hora, "%.2d:", (int)h);
+    sprintf(buffer_minutos, "%.2d:", (int)m);
+    sprintf(buffer_segundos, "%.2d", (int)s);
 
     lcd_clear();
     /// x y
-    lcd_setCursor(8, 0);
+
+    lcd_setCursor(0, 0);
+    lcd_print(buffer_hora);
+
+    lcd_setCursor(3, 0);
+    lcd_print(buffer_minutos);
+
+    lcd_setCursor(6, 0);
+    lcd_print(buffer_segundos);
+
+    lcd_setCursor(10, 0);
     lcd_print(buffer_distancia);
 
     lcd_setCursor(0, 1);
