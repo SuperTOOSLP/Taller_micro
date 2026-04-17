@@ -1,12 +1,16 @@
 #include "lcd.h"
-#include "temporizador.h"
 
 void lcd_pulseEnable(void)
 {
     PORTD |= (1 << LCD_E);
-    while(obtener_millis() < 1);
+
+    uint32_t t0 = obtener_millis();
+    while ((obtener_millis() - t0) < 1);
+
     PORTD &= ~(1 << LCD_E);
-    while(obtener_millis() < 1);
+
+    t0 = obtener_millis();
+    while ((obtener_millis() - t0) < 1);
 }
 
 void lcd_write4bits(uint8_t data)
@@ -33,7 +37,8 @@ void lcd_send(uint8_t value, uint8_t mode)
     lcd_write4bits(value >> 4);
     lcd_write4bits(value & 0x0F);
 
-    while(obtener_millis() < 2);
+    uint32_t t0 = obtener_millis();
+    while ((obtener_millis() - t0) < 2);
 }
 
 /// funciones a llamar
@@ -43,7 +48,8 @@ void lcd_begin(void)
     DDRD |= (1<<LCD_D7)|(1<<LCD_D6)|(1<<LCD_D5)|(1<<LCD_D4)|(1<<LCD_E);
     DDRB |= (1<<LCD_RS)|(1<<LCD_RW);
 
-    while(obtener_millis() < 50);
+    uint32_t t0 = obtener_millis();
+    while ((obtener_millis() - t0) < 50);
 
     lcd_write4bits(0x03);
     while(obtener_millis() < 1);
@@ -84,4 +90,26 @@ void lcd_print(const char *str)
     {
         lcd_send(*str++, 1);
     }
+}
+
+void mostrar_display(void){
+
+    char buffer_distancia[10];
+    //char buffer_rojo[3];
+    //char buffer_verde[3];
+    //char buffer_azul[3];
+    char buffer_temperatura[10];
+
+
+    sprintf(buffer_distancia, "%d cm", (int)obtener_distancia());
+    sprintf(buffer_temperatura, "%d", (int)read_temperature());
+
+    lcd_clear();
+    /// x y
+    lcd_setCursor(8, 0);
+    lcd_print(buffer_distancia);
+
+    lcd_setCursor(0, 1);
+    lcd_print(buffer_temperatura);
+    
 }
